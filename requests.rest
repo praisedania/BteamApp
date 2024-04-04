@@ -1,11 +1,9 @@
 
- POST http://localhost:4000/send_otp
+ POST http://localhost:4000/sendOtp
 Content-Type: application/json 
 
-{"from":"praidania@gmail.com",
-"to":"omodania393@gmail.com",
-"subject":"otp",
-"text":"email confirmation"
+{
+"email":"omodania393@gmail.com"
 }
 
 ###
@@ -120,5 +118,6 @@ GET http://localhost:4000/chats
 Content-Type: application/json
 
 
-{"sender_id":"1"
+{"sender_id":"1",
+"reciever_id":"2"
 }

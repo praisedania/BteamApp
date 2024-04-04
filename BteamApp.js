@@ -35,13 +35,13 @@ function generateOTP() {
 /********************ENDPOINTS *******************/
 
 app.post("/sendOtp", bodyparser.json(), function (req, res) {
-  const { from, to, subject, text, } = req.body
+  const email = req.body.email
   const otp =generateOTP()
   const message = {
-    from,
-    to,
-    subject,
-    text,
+    from:"praisdania@gmail.com",
+    to:email,
+    subject:"your otp verification",
+    text:`your otp verification is ${otp}`
   };
   transporter.sendMail(message, function (error, result) {
     if (error) { console.log(error) }
@@ -175,7 +175,9 @@ app.post("/chats", bodyparser.json(), function (req, res) {
 
 app.get("/chats", bodyparser.json(), function (req, res) {
   var sql = `SELECT*FROM chats WHERE 
-    sender_id='${req.body.sender_id}' `
+    sender_id='${req.body.sender_id}' AND reciever_id ='${req.body.reciever_id}' 
+    OR reciever_id ='${req.body.reciever_id}' AND sender_id='${req.body.sender_id}' ORDER BY TIME_STAMP
+     `
   con.query(sql, function (err, result) {
     if (err) throw err;
 
